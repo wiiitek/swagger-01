@@ -17,3 +17,4 @@ This is a project to check Swagger for:
 * Support for REST returning files
 * Various ways for generating documentation
 * Code and mocks generation
+
