@@ -1,13 +1,10 @@
-# swagger-01
+swagger-01
+==========
+
+[![Build Status](https://travis-ci.org/wiiitek/swagger-01.svg?branch=master)](https://travis-ci.org/wiiitek/swagger-01)
 
 Build
 -----
-
-Gradle 4.x is required for wrapper task. The first step is to download *gradlew*:
-
-      gradle wrapper
-
-To check Gradle scripts run
 
       gradlew build --warning-mode all
 
