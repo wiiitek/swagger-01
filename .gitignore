@@ -6,6 +6,8 @@
 /gradlew.bat
 
 # IntelliJ Idea
-
 /.idea/
 *.iml
+
+# output
+build/
