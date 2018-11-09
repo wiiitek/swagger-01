@@ -4,6 +4,7 @@ version = '0.0.1-SNAPSHOT'
 buildscript {
   ext {
     springBootVersion = '2.1.0.RELEASE'
+    springfoxVersion = '2.9.2'
   }
   repositories {
     mavenCentral()
