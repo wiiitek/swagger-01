@@ -7,6 +7,10 @@ Gradle 4.x is required for wrapper task. The first step is to download *gradlew*
 
       gradle wrapper
 
+To check Gradle scripts run
+
+      gradlew build --warning-mode all
+
 Description
 -----------
 
