@@ -4,3 +4,8 @@
 /gradle/wrapper
 /gradlew
 /gradlew.bat
+
+# IntelliJ Idea
+
+/.idea/
+*.iml
