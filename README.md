@@ -19,3 +19,8 @@ This is a project to check Swagger for:
 * Various ways for generating documentation
 * Code and mocks generation
 
+### Persistence
+
+By default this project use H2 database in `~/swagger-01/h2.db` file.
+
+On Windows this will be in `C:\Users\<user>\swagger-01` folder.
