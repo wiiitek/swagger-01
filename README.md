@@ -21,6 +21,7 @@ This is a project to check Swagger for:
 
 ### Persistence
 
-By default this project use H2 database in `~/swagger-01/h2.db` file.
+H2 console will be available at [localhost:8080/h2](http://localhost:8080/h2).
 
-On Windows this will be in `C:\Users\<user>\swagger-01` folder.
+By default this project saves database in `~/test` file. On Windows this will be in `C:\Users\<user>` folder.
+
