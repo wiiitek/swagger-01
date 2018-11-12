@@ -1,0 +1,44 @@
+def generatedModule = file("$projectDir/../api_v.2.x_generated")
+def generatedModulePath = generatedModule.absolutePath
+def swaggerInputDir = 'src/main/resources/swagger/'
+def packagePrefix = 'pl.kubiczak.test.swagger.api_v2.x.generated.'
+
+swaggerSources {
+  ToDoV1 {
+    inputFile = file(swaggerInputDir + 'todo-v1.yaml')
+    code {
+      outputDir = generatedModule
+      language = 'spring'
+      additionalProperties = [
+        'modelPackage': packagePrefix + 'tasks.model',
+        'apiPackage'  : packagePrefix + 'tasks.api',
+        'dateLibrary' : 'java8'
+      ]
+      components = ['models', 'apis']
+    }
+  }
+}
+
+sourceSets.main.java.srcDir "${swaggerSources.ToDoV1.code.outputDir}/src/main/java"
+
+compileJava.dependsOn swaggerSources.ToDoV1.code
+
+// we want to delete generate controllers as we will implement them by ourselves
+task ToDoV1ControllersDelete {
+  doLast {
+    println generatedModulePath
+    delete fileTree(generatedModulePath) {
+      include '**/*Controller.java'
+    }
+  }
+}
+generateSwaggerCodeToDoV1.finalizedBy ToDoV1ControllersDelete
+
+
+// clean should also delete generated code
+task cleanGeneratedCode {
+  doLast {
+    delete files(generatedModulePath)
+  }
+}
+clean.dependsOn cleanGeneratedCode

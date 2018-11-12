@@ -1,0 +1,122 @@
+swagger: '2.0'
+info:
+  title: Swagger v 2.x
+  version: '0.1.0'
+  description: REST api for To-Do list.
+  license:
+    name: CC BY-NC 4.0
+    url: https://creativecommons.org/licenses/by-nc/4.0/
+host: localhost:8084
+basePath: /v1
+schemes: [ http]
+consumes: [ application/json]
+produces: [ application/json]
+
+
+paths:
+  '/tasks':
+    get:
+      summary: Read tasks
+      operationId: readTasks
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TaskOutput'
+            example: [
+            {
+              id: 'c57d7b55-bbcc-42e9-bb38-8ee0392b4719',
+              description: Call John Doe,
+              createdAt: '2018-01-30T11:11:11.111Z'
+            },
+            {
+              id: 'c42401a8-8eb6-4d10-867e-8b9bc8eb3832',
+              description: Buy birthday present for Jane,
+              createdAt: '2018-03-16T17:18:19.200Z'
+            }
+            ]
+    post:
+      summary: Add a new task
+      operationId: createTask
+      parameters:
+      - in: body
+        name: body
+        description: Task object to be created
+        required: true
+        schema:
+          $ref: '#/definitions/TaskInput'
+      responses:
+        405:
+          description: Invalid input
+  '/tasks/{uuid}':
+    put:
+      summary: Update an existing task
+      operationId: updateTask
+      parameters:
+      - name: uuid
+        in: path
+        description: ID of task to update
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        description: Data for task update
+        required: true
+        schema:
+          $ref: '#/definitions/TaskInput'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/TaskOutput'
+        400:
+          description: Invalid ID supplied
+        404:
+          description: Task not found
+        405:
+          description: Validation exception
+    delete:
+      summary: Delete a task
+      operationId: deleteTask
+      parameters:
+      - name: uuid
+        in: path
+        description: ID of task to delete
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/TaskOutput'
+        400:
+          description: Invalid ID supplied
+        404:
+          description: Task not found
+        405:
+          description: Validation exception
+
+
+definitions:
+  TaskInput:
+    type: "object"
+    properties:
+      description:
+        type: string
+        example: Prepare description for API
+  TaskOutput:
+    allOf:
+    - $ref: '#/definitions/TaskInput'
+    - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'da9c2a70-3a05-48b3-bdab-30805ded306f'
+        createdAt:
+          type: string
+          format: date-time
