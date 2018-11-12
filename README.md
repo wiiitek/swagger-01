@@ -19,3 +19,9 @@ This is a project to check Swagger for:
 * Various ways for generating documentation
 * Code and mocks generation
 
+### Persistence
+
+H2 console will be available at [localhost:8080/h2](http://localhost:8080/h2).
+
+By default this project saves database in `~/test` file. On Windows this will be in `C:\Users\<user>` folder.
+
