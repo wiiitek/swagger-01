@@ -1,7 +1,7 @@
-def generatedModule = file("$projectDir/../api_v.2.x_generated")
+def generatedModule = file("$projectDir/../v.2.x_generated")
 def generatedModulePath = generatedModule.absolutePath
 def swaggerInputDir = 'src/main/resources/swagger/'
-def packagePrefix = 'pl.kubiczak.test.swagger.api_v2.x.generated.'
+def packagePrefix = 'pl.kubiczak.test.swagger.v2.x.generated.'
 
 swaggerSources {
   ToDoV1 {

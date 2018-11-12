@@ -1,4 +1,4 @@
 rootProject.name = 'swagger-01'
 
-include 'api_v.2.x'
-include 'api_v.3.x'
+include 'v.2.x'
+include 'v.3.x'
