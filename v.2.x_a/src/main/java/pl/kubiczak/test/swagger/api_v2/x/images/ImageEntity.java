@@ -1,4 +1,4 @@
-package pl.kubiczak.test.swagger.api_v2.x.images.entities;
+package pl.kubiczak.test.swagger.api_v2.x.images;
 
 import java.util.Objects;
 import java.util.UUID;

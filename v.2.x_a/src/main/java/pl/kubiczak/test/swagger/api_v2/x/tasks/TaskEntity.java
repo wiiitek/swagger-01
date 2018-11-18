@@ -1,4 +1,4 @@
-package pl.kubiczak.test.swagger.api_v2.x.tasks.entities;
+package pl.kubiczak.test.swagger.api_v2.x.tasks;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
