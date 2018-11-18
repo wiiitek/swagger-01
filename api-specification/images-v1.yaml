@@ -1,0 +1,82 @@
+swagger: '2.0'
+info:
+  title: Swagger v 2.x
+  version: '0.1.0'
+  description: REST api for To-Do list.
+  license:
+    name: CC BY-NC 4.0
+    url: https://creativecommons.org/licenses/by-nc/4.0/
+host: localhost:8084
+basePath: /v1
+schemes: [ http]
+produces: [ application/json]
+
+paths:
+  '/images':
+    get:
+      summary: List of all images
+      operationId: readImages
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ImageOutput'
+            example: [
+            {
+              id: '9335d5b8-c5d5-4d9b-ab9f-0a87538a6273',
+              description: Leaves,
+              url: 'https://c1.staticflickr.com/5/4844/45213830044_08bda7bc22_z.jpg'
+            },
+            {
+              id: 'e2f317de-c782-4025-bcf2-57357fc9647d',
+              description: The first frost,
+              url: 'https://c1.staticflickr.com/5/4808/45869530552_e7edcd9a78_z.jpg'
+            },
+            {
+              id: '9383b998-6034-4714-8437-12989fba58eb',
+              description: Lavender,
+              url: 'https://c2.staticflickr.com/2/1936/45311733101_e6f64325b8_z.jpg'
+            }
+            ]
+    post:
+      summary: Add a new image
+      operationId: createImage
+      consumes: [ application/json]
+      parameters:
+      - in: body
+        name: body
+        description: Task object to be created
+        required: true
+        schema:
+          $ref: '#/definitions/ImageInput'
+      responses:
+        200:
+          description: Image created
+          schema:
+            $ref: '#/definitions/ImageOutput'
+        405:
+          description: Invalid input
+
+definitions:
+  ImageInput:
+    type: "object"
+    properties:
+      description:
+        type: string
+        example: Autumn in the city
+      url:
+        type: string
+        example: https://c1.staticflickr.com/5/4844/44072966970_2dc34a9529_z.jpg
+    required:
+    - url
+  ImageOutput:
+    allOf:
+    - $ref: '#/definitions/ImageInput'
+    - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'da9c2a70-3a05-48b3-bdab-30805ded306f'
