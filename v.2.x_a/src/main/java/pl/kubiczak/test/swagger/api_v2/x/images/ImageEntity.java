@@ -1,16 +1,24 @@
 package pl.kubiczak.test.swagger.api_v2.x.images;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
+import pl.kubiczak.test.swagger.api_v2.x.tasks.TaskEntity;
 
 @Entity
-@Table
+@Table(name = "image")
 public class ImageEntity {
 
   @Id
@@ -27,6 +35,15 @@ public class ImageEntity {
 
   @Column
   private String url;
+
+  @ManyToMany(fetch = FetchType.LAZY,
+    cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE})
+  @JoinTable(name = "task_image",
+    joinColumns = {@JoinColumn(name = "image_id")},
+    inverseJoinColumns = {@JoinColumn(name = "task_id")})
+  private Set<TaskEntity> tasks = new HashSet<>();
 
   public UUID getId() {
     return id;
@@ -52,6 +69,14 @@ public class ImageEntity {
     this.url = url;
   }
 
+  public Set<TaskEntity> getTasks() {
+    return tasks;
+  }
+
+  public void setTasks(Set<TaskEntity> tasks) {
+    this.tasks = tasks;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -63,12 +88,13 @@ public class ImageEntity {
     ImageEntity that = (ImageEntity) o;
     return Objects.equals(id, that.id) &&
       Objects.equals(description, that.description) &&
-      Objects.equals(url, that.url);
+      Objects.equals(url, that.url) &&
+      Objects.equals(tasks, that.tasks);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, description, url);
+    return Objects.hash(id, description, url, tasks);
   }
 
   @Override
@@ -77,6 +103,7 @@ public class ImageEntity {
       "id=" + id +
       ", description='" + description + '\'' +
       ", url='" + url + '\'' +
+      ", tasks=" + tasks +
       '}';
   }
 }
