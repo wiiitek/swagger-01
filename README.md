@@ -19,6 +19,10 @@ This is a project to check Swagger for:
 * Various ways for generating documentation
 * Code and mocks generation
 
+### v.2.x_a
+
+This submodule will use `org.hidetake.swagger.generator` and `io.springfox`.
+
 ### Persistence
 
 H2 console will be available at [localhost:8080/h2](http://localhost:8080/h2).

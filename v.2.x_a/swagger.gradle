@@ -1,7 +1,7 @@
 def generatedModule = file("$projectDir/../v.2.x_generated")
 def generatedModulePath = generatedModule.absolutePath
 def swaggerInputDir = 'src/main/resources/swagger/'
-def packagePrefix = 'pl.kubiczak.test.swagger.v2.x.generated.'
+def packagePrefix = 'pl.kubiczak.test.swagger.v2.x.a.generated.'
 
 swaggerSources {
   TasksV1 {

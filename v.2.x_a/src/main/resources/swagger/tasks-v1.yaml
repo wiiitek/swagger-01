@@ -48,6 +48,10 @@ paths:
         schema:
           $ref: '#/definitions/TaskInput'
       responses:
+        200:
+          description: Task created
+          schema:
+            $ref: '#/definitions/TaskOutput'
         405:
           description: Invalid input
   '/tasks/{uuid}':
