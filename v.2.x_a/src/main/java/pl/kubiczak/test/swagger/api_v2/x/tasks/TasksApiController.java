@@ -2,8 +2,11 @@ package pl.kubiczak.test.swagger.api_v2.x.tasks;
 
 import com.google.common.base.Preconditions;
 import java.time.OffsetDateTime;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.Spliterator;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -15,6 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.kubiczak.test.swagger.api_v2.x.images.ImageEntity;
+import pl.kubiczak.test.swagger.api_v2.x.images.ImageRepository;
+import pl.kubiczak.test.swagger.v2.x.a.generated.model.ImageOutput;
 import pl.kubiczak.test.swagger.v2.x.a.generated.model.TaskInput;
 import pl.kubiczak.test.swagger.v2.x.a.generated.model.TaskOutput;
 import pl.kubiczak.test.swagger.v2.x.a.generated.tasks.api.TasksApi;
@@ -26,10 +32,14 @@ public class TasksApiController implements TasksApi {
 
   private final TaskRepository taskRepository;
 
+  private final ImageRepository imageRepository;
+
   @Autowired
-  public TasksApiController(TaskRepository taskRepository) {
+  public TasksApiController(TaskRepository taskRepository, ImageRepository imageRepository) {
     this.taskRepository
       = Preconditions.checkNotNull(taskRepository, "Tasks repository is missing");
+    this.imageRepository
+      = Preconditions.checkNotNull(imageRepository, "Images repository is missing");
   }
 
   @Override
@@ -37,13 +47,10 @@ public class TasksApiController implements TasksApi {
     TaskEntity toCreate = new TaskEntity();
     toCreate.setDescription(body.getDescription());
     toCreate.setCreatedAt(OffsetDateTime.now());
+    toCreate.setImages(imageEntities(body));
 
     TaskEntity saved = taskRepository.save(toCreate);
-    TaskOutput output = new TaskOutput()
-      .description(saved.getDescription())
-      .id(saved.getId())
-      .createdAt(saved.getCreatedAt());
-
+    TaskOutput output = convert(saved);
     return ResponseEntity.ok(output);
   }
 
@@ -51,11 +58,7 @@ public class TasksApiController implements TasksApi {
   public ResponseEntity<List<TaskOutput>> readTasks() {
     Spliterator<TaskEntity> spliterator = taskRepository.findAll().spliterator();
     List<TaskOutput> outputList = StreamSupport.stream(spliterator, false)
-      .map(entity -> new TaskOutput()
-        .description(entity.getDescription())
-        .id(entity.getId())
-        .createdAt(entity.getCreatedAt())
-      )
+      .map(this::convert)
       .collect(Collectors.toList());
     return ResponseEntity.ok(outputList);
   }
@@ -68,15 +71,12 @@ public class TasksApiController implements TasksApi {
     return optional
       .map((toUpdate) -> {
         toUpdate.setDescription(body.getDescription());
+        toUpdate.setImages(imageEntities(body));
         return toUpdate;
       })
       .map(taskRepository::save)
-      .map(saved -> new TaskOutput()
-        .description(saved.getDescription())
-        .id(saved.getId())
-        .createdAt(saved.getCreatedAt())
-      )
-      .map(savedTaskOutput -> ResponseEntity.ok(savedTaskOutput))
+      .map(this::convert)
+      .map(ResponseEntity::ok)
       .orElse(ResponseEntity.notFound().build());
   }
 
@@ -95,5 +95,37 @@ public class TasksApiController implements TasksApi {
       )
       .map(ResponseEntity::ok)
       .orElse(ResponseEntity.notFound().build());
+  }
+
+  private Set<ImageEntity> imageEntities(TaskInput body) {
+    if (body.getImages() != null) {
+      Set<ImageEntity> images = new HashSet<>();
+      body.getImages()
+        .forEach((uuid) -> {
+          Optional<ImageEntity> optional = imageRepository.findById(uuid);
+          optional.ifPresent(images::add);
+        });
+      return images;
+    } else {
+      return Collections.emptySet();
+    }
+  }
+
+  private TaskOutput convert(TaskEntity entity) {
+    return new TaskOutput()
+      .description(entity.getDescription())
+      .id(entity.getId())
+      .createdAt(entity.getCreatedAt())
+      .images(imagesOutput(entity));
+  }
+
+  private List<ImageOutput> imagesOutput(TaskEntity entity) {
+    return entity.getImages().stream()
+      .map(imageEntity -> new ImageOutput()
+        .id(imageEntity.getId())
+        .url(imageEntity.getUrl())
+        .description(imageEntity.getDescription())
+      )
+      .collect(Collectors.toList());
   }
 }
