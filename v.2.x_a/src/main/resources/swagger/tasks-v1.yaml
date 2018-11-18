@@ -9,9 +9,7 @@ info:
 host: localhost:8084
 basePath: /v1
 schemes: [ http]
-consumes: [ application/json]
 produces: [ application/json]
-
 
 paths:
   '/tasks':
@@ -40,6 +38,7 @@ paths:
     post:
       summary: Add a new task
       operationId: createTask
+      consumes: [ application/json]
       parameters:
       - in: body
         name: body
@@ -58,6 +57,7 @@ paths:
     put:
       summary: Update an existing task
       operationId: updateTask
+      consumes: [ application/json]
       parameters:
       - name: uuid
         in: path
