@@ -1,14 +1,12 @@
-def generatedModule = file("$projectDir/../v.2.x_a_generated")
-def generatedModulePath = generatedModule.absolutePath
 def swaggerInputDir = '../api-specification/'
+def generatedModule = "$projectDir/../v.2.x_a_generated"
 def packagePrefix = 'pl.kubiczak.test.swagger.v2.x.a.generated.'
 
 swaggerSources {
   TasksV1 {
     inputFile = file(swaggerInputDir + 'tasks-v1.yaml')
     code {
-      outputDir = generatedModule
-      wipeOutputDir = false
+      outputDir = file("$generatedModule/tasks-v1")
       language = 'spring'
       additionalProperties = [
         'modelPackage': packagePrefix + 'tasks.model',
@@ -21,8 +19,7 @@ swaggerSources {
   ImagesV1 {
     inputFile = file(swaggerInputDir + 'images-v1.yaml')
     code {
-      outputDir = generatedModule
-      wipeOutputDir = false
+      outputDir = file("$generatedModule/images-v1")
       language = 'spring'
       additionalProperties = [
         'modelPackage': packagePrefix + 'images.model',
@@ -44,9 +41,8 @@ compileJava.dependsOn swaggerSources.ImagesV1.code
 // Tasks
 task TasksV1ControllersDelete {
   doLast {
-    println generatedModulePath
-    delete fileTree(generatedModulePath) {
-      include '**/tasks/api/*Controller.java'
+    delete fileTree(swaggerSources.TasksV1.code.outputDir.absolutePath) {
+      include '**/api/*Controller.java'
     }
   }
 }
@@ -54,9 +50,8 @@ generateSwaggerCodeTasksV1.finalizedBy TasksV1ControllersDelete
 // Images
 task ImagesV1ControllersDelete {
   doLast {
-    println generatedModulePath
-    delete fileTree(generatedModulePath) {
-      include '**/images/api/*Controller.java'
+    delete fileTree(swaggerSources.ImagesV1.code.outputDir.absolutePath) {
+      include '**/api/*Controller.java'
     }
   }
 }
@@ -66,7 +61,7 @@ generateSwaggerCodeImagesV1.finalizedBy ImagesV1ControllersDelete
 // clean should also delete generated code
 task cleanGeneratedCode {
   doLast {
-    delete files(generatedModulePath)
+    delete files(generatedModule)
   }
 }
 clean.dependsOn cleanGeneratedCode
