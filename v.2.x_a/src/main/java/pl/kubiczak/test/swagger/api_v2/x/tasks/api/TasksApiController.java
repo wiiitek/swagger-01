@@ -12,16 +12,16 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import pl.kubiczak.test.swagger.api_v2.x.tasks.entities.TaskEntity;
 import pl.kubiczak.test.swagger.api_v2.x.tasks.repository.TaskRepository;
 import pl.kubiczak.test.swagger.v2.x.a.generated.tasks.api.TasksApi;
 import pl.kubiczak.test.swagger.v2.x.a.generated.tasks.model.TaskInput;
 import pl.kubiczak.test.swagger.v2.x.a.generated.tasks.model.TaskOutput;
 
-@Controller
+@RestController
 @Transactional
 public class TasksApiController implements TasksApi {
 
