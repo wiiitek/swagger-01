@@ -20,7 +20,15 @@ definitions:
     properties:
       description:
         type: string
-        example: Prepare description for API
+        example: Prepare for tomorrow.
+      images:
+        type: array
+        items:
+          type: string
+          format: uuid
+        example: [
+          '23c96231-170b-4109-944a-a295ee504faf'
+        ]
   TaskOutput:
     allOf:
     - $ref: '#/definitions/TaskInput'
@@ -33,6 +41,10 @@ definitions:
         createdAt:
           type: string
           format: date-time
+        images:
+          type: array
+          items:
+            $ref: '#/definitions/ImageOutput'
   ######################################################
   # Images
   ######################################################
@@ -56,6 +68,3 @@ definitions:
           type: string
           format: uuid
           example: 'da9c2a70-3a05-48b3-bdab-30805ded306f'
-        createdAt:
-          type: string
-          format: date-time

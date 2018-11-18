@@ -27,12 +27,14 @@ paths:
             {
               id: 'c57d7b55-bbcc-42e9-bb38-8ee0392b4719',
               description: Call John Doe,
-              createdAt: '2018-01-30T11:11:11.111Z'
+              createdAt: '2018-01-30T11:11:11.111Z',
+              images: []
             },
             {
               id: 'c42401a8-8eb6-4d10-867e-8b9bc8eb3832',
               description: Buy birthday present for Jane,
-              createdAt: '2018-03-16T17:18:19.200Z'
+              createdAt: '2018-03-16T17:18:19.200Z',
+              images: []
             }
             ]
     post:
