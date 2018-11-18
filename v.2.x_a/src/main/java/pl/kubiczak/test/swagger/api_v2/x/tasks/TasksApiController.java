@@ -15,9 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.kubiczak.test.swagger.v2.x.a.generated.model.TaskInput;
+import pl.kubiczak.test.swagger.v2.x.a.generated.model.TaskOutput;
 import pl.kubiczak.test.swagger.v2.x.a.generated.tasks.api.TasksApi;
-import pl.kubiczak.test.swagger.v2.x.a.generated.tasks.model.TaskInput;
-import pl.kubiczak.test.swagger.v2.x.a.generated.tasks.model.TaskOutput;
+
 
 @RestController
 @Transactional

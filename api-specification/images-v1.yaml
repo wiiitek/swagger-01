@@ -22,7 +22,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/ImageOutput'
+              $ref: './model-v1.yaml#/definitions/ImageOutput'
             example: [
             {
               id: '9335d5b8-c5d5-4d9b-ab9f-0a87538a6273',
@@ -50,33 +50,11 @@ paths:
         description: Task object to be created
         required: true
         schema:
-          $ref: '#/definitions/ImageInput'
+          $ref: './model-v1.yaml#/definitions/ImageInput'
       responses:
         200:
           description: Image created
           schema:
-            $ref: '#/definitions/ImageOutput'
+            $ref: './model-v1.yaml#/definitions/ImageOutput'
         405:
           description: Invalid input
-
-definitions:
-  ImageInput:
-    type: "object"
-    properties:
-      description:
-        type: string
-        example: Autumn in the city
-      url:
-        type: string
-        example: https://c1.staticflickr.com/5/4844/44072966970_2dc34a9529_z.jpg
-    required:
-    - url
-  ImageOutput:
-    allOf:
-    - $ref: '#/definitions/ImageInput'
-    - type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 'da9c2a70-3a05-48b3-bdab-30805ded306f'

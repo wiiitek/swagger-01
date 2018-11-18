@@ -22,7 +22,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/TaskOutput'
+              $ref: './model-v1.yaml#/definitions/TaskOutput'
             example: [
             {
               id: 'c57d7b55-bbcc-42e9-bb38-8ee0392b4719',
@@ -45,12 +45,12 @@ paths:
         description: Task object to be created
         required: true
         schema:
-          $ref: '#/definitions/TaskInput'
+          $ref: './model-v1.yaml#/definitions/TaskInput'
       responses:
         200:
           description: Task created
           schema:
-            $ref: '#/definitions/TaskOutput'
+            $ref: './model-v1.yaml#/definitions/TaskOutput'
         405:
           description: Invalid input
   '/tasks/{uuid}':
@@ -70,12 +70,12 @@ paths:
         description: Data for task update
         required: true
         schema:
-          $ref: '#/definitions/TaskInput'
+          $ref: './model-v1.yaml#/definitions/TaskInput'
       responses:
         200:
           description: successful operation
           schema:
-            $ref: '#/definitions/TaskOutput'
+            $ref: './model-v1.yaml#/definitions/TaskOutput'
         400:
           description: Invalid ID supplied
         404:
@@ -96,7 +96,7 @@ paths:
         200:
           description: successful operation
           schema:
-            $ref: '#/definitions/TaskOutput'
+            $ref: './model-v1.yaml#/definitions/TaskOutput'
         400:
           description: Invalid ID supplied
         404:
@@ -104,23 +104,3 @@ paths:
         405:
           description: Validation exception
 
-
-definitions:
-  TaskInput:
-    type: "object"
-    properties:
-      description:
-        type: string
-        example: Prepare description for API
-  TaskOutput:
-    allOf:
-    - $ref: '#/definitions/TaskInput'
-    - type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 'da9c2a70-3a05-48b3-bdab-30805ded306f'
-        createdAt:
-          type: string
-          format: date-time

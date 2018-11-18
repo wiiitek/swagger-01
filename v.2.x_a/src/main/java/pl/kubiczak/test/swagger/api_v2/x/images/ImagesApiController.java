@@ -11,8 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.kubiczak.test.swagger.v2.x.a.generated.images.api.ImagesApi;
-import pl.kubiczak.test.swagger.v2.x.a.generated.images.model.ImageInput;
-import pl.kubiczak.test.swagger.v2.x.a.generated.images.model.ImageOutput;
+import pl.kubiczak.test.swagger.v2.x.a.generated.model.ImageInput;
+import pl.kubiczak.test.swagger.v2.x.a.generated.model.ImageOutput;
+
 
 @RestController
 @Transactional

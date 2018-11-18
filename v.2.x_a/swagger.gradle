@@ -3,17 +3,29 @@ def generatedModule = "$projectDir/../v.2.x_a_generated"
 def packagePrefix = 'pl.kubiczak.test.swagger.v2.x.a.generated.'
 
 swaggerSources {
+  ModelV1 {
+    inputFile = file(swaggerInputDir + 'model-v1.yaml')
+    code {
+      outputDir = file("$generatedModule/model-v1")
+      language = 'spring'
+      additionalProperties = [
+        'modelPackage': packagePrefix + 'model',
+        'dateLibrary' : 'java8'
+      ]
+      components = ['models']
+    }
+  }
   TasksV1 {
     inputFile = file(swaggerInputDir + 'tasks-v1.yaml')
     code {
       outputDir = file("$generatedModule/tasks-v1")
       language = 'spring'
       additionalProperties = [
-        'modelPackage': packagePrefix + 'tasks.model',
+        'modelPackage': packagePrefix + 'model',
         'apiPackage'  : packagePrefix + 'tasks.api',
         'dateLibrary' : 'java8'
       ]
-      components = ['models', 'apis']
+      components = ['apis']
     }
   }
   ImagesV1 {
@@ -22,18 +34,20 @@ swaggerSources {
       outputDir = file("$generatedModule/images-v1")
       language = 'spring'
       additionalProperties = [
-        'modelPackage': packagePrefix + 'images.model',
+        'modelPackage': packagePrefix + 'model',
         'apiPackage'  : packagePrefix + 'images.api',
         'dateLibrary' : 'java8'
       ]
-      components = ['models', 'apis']
+      components = ['apis']
     }
   }
 }
 
+sourceSets.main.java.srcDir "${swaggerSources.ModelV1.code.outputDir}/src/main/java"
 sourceSets.main.java.srcDir "${swaggerSources.TasksV1.code.outputDir}/src/main/java"
 sourceSets.main.java.srcDir "${swaggerSources.ImagesV1.code.outputDir}/src/main/java"
 
+compileJava.dependsOn swaggerSources.ModelV1.code
 compileJava.dependsOn swaggerSources.TasksV1.code
 compileJava.dependsOn swaggerSources.ImagesV1.code
 
