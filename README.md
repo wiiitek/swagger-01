@@ -6,12 +6,26 @@ swagger-01
 Build
 -----
 
-      gradlew build --warning-mode all
+```
+./gradlew build --warning-mode all
+```
+
+Run
+---
+
+Run it with
+
+```
+./gradlew :java-spring:v2:project:bootRun
+```
+
+and then check Swagger at [localhost:8084/swagger-ui.html](http://localhost:8084/swagger-ui.html).
+
 
 Description
 -----------
 
-This is a project to check Swagger for:
+This repository goal is to check Swagger for:
 
 * Differences between Swagger 2.x and Open Api 3.x
 * API described in multiple files
