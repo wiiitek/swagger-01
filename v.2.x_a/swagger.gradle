@@ -1,4 +1,4 @@
-def swaggerInputDir = '../api-specification/'
+def swaggerInputDir = '../api-specification/v2.0/'
 def generatedModule = "$projectDir/../v.2.x_a_generated"
 def packagePrefix = 'pl.kubiczak.test.swagger.v2.x.a.generated.'
 
