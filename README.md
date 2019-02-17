@@ -19,7 +19,7 @@ This is a project to check Swagger for:
 * Various ways for generating documentation
 * Code and mocks generation
 
-### v.2.x_a
+### java-spring:v2
 
 This submodule will use `org.hidetake.swagger.generator` and `io.springfox`.
 

@@ -1,0 +1,81 @@
+def swaggerInputDir = "$rootDir/api-specification/v2/"
+def generatedModule = "$projectDir/../generated"
+def packagePrefix = 'pl.kubiczak.test.swagger.java.spring.v2.generated.'
+
+swaggerSources {
+  ModelV1 {
+    inputFile = file(swaggerInputDir + 'model-v1.yaml')
+    code {
+      outputDir = file("$generatedModule/model-v1")
+      language = 'spring'
+      additionalProperties = [
+        'modelPackage': packagePrefix + 'model',
+        'dateLibrary' : 'java8'
+      ]
+      components = ['models']
+    }
+  }
+  TasksV1 {
+    inputFile = file(swaggerInputDir + 'tasks-v1.yaml')
+    code {
+      outputDir = file("$generatedModule/tasks-v1")
+      language = 'spring'
+      additionalProperties = [
+        'modelPackage': packagePrefix + 'model',
+        'apiPackage'  : packagePrefix + 'tasks.api',
+        'dateLibrary' : 'java8'
+      ]
+      components = ['apis']
+    }
+  }
+  ImagesV1 {
+    inputFile = file(swaggerInputDir + 'images-v1.yaml')
+    code {
+      outputDir = file("$generatedModule/images-v1")
+      language = 'spring'
+      additionalProperties = [
+        'modelPackage': packagePrefix + 'model',
+        'apiPackage'  : packagePrefix + 'images.api',
+        'dateLibrary' : 'java8'
+      ]
+      components = ['apis']
+    }
+  }
+}
+
+sourceSets.main.java.srcDir "${swaggerSources.ModelV1.code.outputDir}/src/main/java"
+sourceSets.main.java.srcDir "${swaggerSources.TasksV1.code.outputDir}/src/main/java"
+sourceSets.main.java.srcDir "${swaggerSources.ImagesV1.code.outputDir}/src/main/java"
+
+compileJava.dependsOn swaggerSources.ModelV1.code
+compileJava.dependsOn swaggerSources.TasksV1.code
+compileJava.dependsOn swaggerSources.ImagesV1.code
+
+// we want to delete generate controllers as we will implement them by ourselves
+// Tasks
+task TasksV1ControllersDelete {
+  doLast {
+    delete fileTree(swaggerSources.TasksV1.code.outputDir.absolutePath) {
+      include '**/api/*Controller.java'
+    }
+  }
+}
+generateSwaggerCodeTasksV1.finalizedBy TasksV1ControllersDelete
+// Images
+task ImagesV1ControllersDelete {
+  doLast {
+    delete fileTree(swaggerSources.ImagesV1.code.outputDir.absolutePath) {
+      include '**/api/*Controller.java'
+    }
+  }
+}
+generateSwaggerCodeImagesV1.finalizedBy ImagesV1ControllersDelete
+
+
+// clean should also delete generated code
+task cleanGeneratedCode {
+  doLast {
+    delete files(generatedModule)
+  }
+}
+clean.dependsOn cleanGeneratedCode
