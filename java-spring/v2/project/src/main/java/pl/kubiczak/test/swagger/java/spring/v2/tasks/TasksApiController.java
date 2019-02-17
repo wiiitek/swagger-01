@@ -25,6 +25,8 @@ import pl.kubiczak.test.swagger.java.spring.v2.generated.tasks.api.TasksApi;
 import pl.kubiczak.test.swagger.java.spring.v2.images.ImageEntity;
 import pl.kubiczak.test.swagger.java.spring.v2.images.ImageRepository;
 
+import static java.time.ZoneOffset.UTC;
+
 
 @RestController
 @Transactional
@@ -46,7 +48,7 @@ public class TasksApiController implements TasksApi {
   public ResponseEntity<TaskOutput> createTask(@Valid @RequestBody TaskInput body) {
     TaskEntity toCreate = new TaskEntity();
     toCreate.setDescription(body.getDescription());
-    toCreate.setCreatedAt(OffsetDateTime.now());
+    toCreate.setCreatedAt(OffsetDateTime.now(UTC));
     toCreate.setImages(imageEntities(body));
 
     TaskEntity saved = taskRepository.save(toCreate);
