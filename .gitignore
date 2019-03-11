@@ -1,9 +1,6 @@
 
 # wrapped gradle
 /.gradle/
-/gradle/
-/gradlew
-/gradlew.bat
 
 # IntelliJ Idea
 /.idea/
