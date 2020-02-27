@@ -16,7 +16,7 @@ Run
 Run it with
 
 ```
-./gradlew :java-spring:v2:project:bootRun
+./gradlew :v2:java-spring:project:bootRun
 ```
 
 and then check Swagger at [localhost:8084/swagger-ui.html](http://localhost:8084/swagger-ui.html).
