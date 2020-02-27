@@ -1,4 +1,4 @@
-package pl.kubiczak.test.swagger.java.spring.v2.tasks;
+package pl.kubiczak.test.swagger.v2.java.spring.tasks;
 
 import com.google.common.base.Preconditions;
 import java.time.OffsetDateTime;
@@ -18,12 +18,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.kubiczak.test.swagger.java.spring.v2.generated.model.ImageOutput;
-import pl.kubiczak.test.swagger.java.spring.v2.generated.model.TaskInput;
-import pl.kubiczak.test.swagger.java.spring.v2.generated.model.TaskOutput;
-import pl.kubiczak.test.swagger.java.spring.v2.generated.tasks.api.TasksApi;
-import pl.kubiczak.test.swagger.java.spring.v2.images.ImageEntity;
-import pl.kubiczak.test.swagger.java.spring.v2.images.ImageRepository;
+import pl.kubiczak.test.swagger.v2.java.spring.generated.model.ImageOutput;
+import pl.kubiczak.test.swagger.v2.java.spring.generated.model.TaskInput;
+import pl.kubiczak.test.swagger.v2.java.spring.generated.model.TaskOutput;
+import pl.kubiczak.test.swagger.v2.java.spring.generated.tasks.api.TasksApi;
+import pl.kubiczak.test.swagger.v2.java.spring.images.ImageEntity;
+import pl.kubiczak.test.swagger.v2.java.spring.images.ImageRepository;
 
 import static java.time.ZoneOffset.UTC;
 

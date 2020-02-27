@@ -1,4 +1,4 @@
-package pl.kubiczak.test.swagger.java.spring.v2;
+package pl.kubiczak.test.swagger.v2.java.spring;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

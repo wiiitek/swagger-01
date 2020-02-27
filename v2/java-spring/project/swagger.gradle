@@ -1,6 +1,6 @@
 def swaggerInputDir = "$rootDir/api-specification/v2/"
 def generatedModule = "$projectDir/../generated"
-def packagePrefix = 'pl.kubiczak.test.swagger.java.spring.v2.generated.'
+def packagePrefix = 'pl.kubiczak.test.swagger.v2.java.spring.generated.'
 
 swaggerSources {
   ModelV1 {

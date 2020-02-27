@@ -1,4 +1,4 @@
-package pl.kubiczak.test.swagger.java.spring.v2;
+package pl.kubiczak.test.swagger.v2.java.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package pl.kubiczak.test.swagger.java.spring.v2.config;
+package pl.kubiczak.test.swagger.v2.java.spring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

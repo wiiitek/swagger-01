@@ -1,4 +1,4 @@
-package pl.kubiczak.test.swagger.java.spring.v2.tasks;
+package pl.kubiczak.test.swagger.v2.java.spring.tasks;
 
 import java.time.OffsetDateTime;
 import java.util.HashSet;
@@ -16,7 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
-import pl.kubiczak.test.swagger.java.spring.v2.images.ImageEntity;
+import pl.kubiczak.test.swagger.v2.java.spring.images.ImageEntity;
 
 @Entity
 @Table(name = "task")

@@ -1,4 +1,4 @@
-package pl.kubiczak.test.swagger.java.spring.v2.images;
+package pl.kubiczak.test.swagger.v2.java.spring.images;
 
 import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;

@@ -1,4 +1,4 @@
-package pl.kubiczak.test.swagger.java.spring.v2.images;
+package pl.kubiczak.test.swagger.v2.java.spring.images;
 
 import java.util.List;
 import java.util.Spliterator;
@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.kubiczak.test.swagger.java.spring.v2.generated.images.api.ImagesApi;
-import pl.kubiczak.test.swagger.java.spring.v2.generated.model.ImageInput;
-import pl.kubiczak.test.swagger.java.spring.v2.generated.model.ImageOutput;
+import pl.kubiczak.test.swagger.v2.java.spring.generated.images.api.ImagesApi;
+import pl.kubiczak.test.swagger.v2.java.spring.generated.model.ImageInput;
+import pl.kubiczak.test.swagger.v2.java.spring.generated.model.ImageOutput;
 
 
 @RestController

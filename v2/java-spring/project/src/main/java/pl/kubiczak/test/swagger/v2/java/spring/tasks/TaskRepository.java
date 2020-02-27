@@ -1,4 +1,4 @@
-package pl.kubiczak.test.swagger.java.spring.v2.tasks;
+package pl.kubiczak.test.swagger.v2.java.spring.tasks;
 
 import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;
