@@ -1,7 +1,0 @@
-group = 'pl.kubiczak.test.swagger'
-version = '0.0.1-SNAPSHOT'
-
-wrapper {
-  gradleVersion = '4.10.2'
-  distributionType = Wrapper.DistributionType.ALL
-}
