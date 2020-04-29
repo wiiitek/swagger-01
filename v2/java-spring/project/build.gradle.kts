@@ -27,6 +27,10 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
+/* ===============================================
+*               Swagger Tasks
+*  =============================================== */
+
 val swaggerInputDir = "$rootDir/api-specification/v2/"
 val generatedModule = "$projectDir/../generated"
 val packagePrefix = "pl.kubiczak.test.swagger.v2.java.spring.generated."
