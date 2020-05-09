@@ -2,22 +2,19 @@ import org.hidetake.gradle.swagger.generator.GenerateSwaggerCode
 
 plugins {
   java
-  id("org.springframework.boot") version "2.1.13.RELEASE"
+  id("org.springframework.boot") version "2.3.0.RC1"
   id("io.spring.dependency-management") version "1.0.9.RELEASE"
   id("org.hidetake.swagger.generator") version "2.18.2"
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
-repositories {
-  mavenCentral()
-}
-
 dependencies {
   "swaggerCodegen"("io.swagger:swagger-codegen-cli:2.4.13")
 
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springframework.boot:spring-boot-starter-validation")
 
   implementation("io.springfox:springfox-swagger2:2.9.2")
   implementation("io.springfox:springfox-swagger-ui:2.9.2")
